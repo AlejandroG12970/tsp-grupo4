@@ -84,7 +84,7 @@ async function resolverTSP() {
       <h3>Progreso del algoritmo</h3>
       <p>Permutación actual: {{ cicloActual?.map(letra).join(" → ") }} → {{ letra(cicloActual?.[0] ?? 0) }}</p>
       <p>Progreso: {{ progreso.toFixed(1) }}%</p>
-      <p v-if="mejorCiclo">🏆 Mejor ciclo: {{ mejorCiclo.ciclo.map(letra).join(" → ") }} → {{ letra(mejorCiclo.ciclo[0]) }} (Costo: {{ mejorCiclo.costo }})</p>
+      <p v-if="mejorCiclo">Mejor ciclo: {{ mejorCiclo.ciclo.map(letra).join(" → ") }} → {{ letra(mejorCiclo.ciclo[0]) }} (Costo: {{ mejorCiclo.costo }})</p>
     </div>
 
     <div v-if="resultado">
@@ -194,3 +194,4 @@ input[type="number"] {
   }
 }
 </style>
+
