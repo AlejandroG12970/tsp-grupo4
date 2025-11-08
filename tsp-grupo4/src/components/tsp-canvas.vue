@@ -1,6 +1,6 @@
-﻿<template>
+<template>
   <div class="canvas-container">
-    <canvas ref="canvas" width="500" height="500"></canvas>
+    <canvas ref="canvas" width="650" height="650"></canvas>
   </div>
 </template>
 
@@ -19,11 +19,11 @@ let ctx = null;
 function dibujarGrafo() {
   if (!ctx) return;
   const n = props.matriz.length;
-  const centerX = 250;
-  const centerY = 250;
-  const radius = 180;
+  const centerX = 325;
+  const centerY = 325;
+  const radius = 230;
 
-  ctx.clearRect(0, 0, 500, 500);
+  ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
   ctx.font = "14px Arial";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
@@ -36,7 +36,7 @@ function dibujarGrafo() {
     posiciones.push({ x, y });
   }
 
-  // --- Dibujar aristas ---
+  // Dibujar aristas
   ctx.strokeStyle = "#aaa";
   ctx.lineWidth = 1;
 
@@ -48,16 +48,17 @@ function dibujarGrafo() {
         ctx.lineTo(posiciones[j].x, posiciones[j].y);
         ctx.stroke();
 
-        // Etiqueta de peso
+        // Etiqueta de peso 
         const midX = (posiciones[i].x + posiciones[j].x) / 2;
         const midY = (posiciones[i].y + posiciones[j].y) / 2;
-        ctx.fillStyle = "#444";
+        ctx.fillStyle = "#222";
+        ctx.font = "bold 16px Arial"; 
         ctx.fillText(props.matriz[i][j], midX, midY);
       }
     }
   }
 
-  // --- Dibujar ciclo óptimo ---
+  // Dibujar ciclo óptimo
   if (props.ciclo) {
     ctx.strokeStyle = "#e63946";
     ctx.lineWidth = 3;
@@ -72,10 +73,10 @@ function dibujarGrafo() {
     }
   }
 
-  // --- Dibujar nodos ---
+  // Dibujar nodos
   for (let i = 0; i < n; i++) {
     ctx.beginPath();
-    ctx.arc(posiciones[i].x, posiciones[i].y, 18, 0, 2 * Math.PI);
+    ctx.arc(posiciones[i].x, posiciones[i].y, 20, 0, 2 * Math.PI);
     ctx.fillStyle = "#2c7be5";
     ctx.fill();
     ctx.strokeStyle = "white";
@@ -84,7 +85,7 @@ function dibujarGrafo() {
 
     // Letra del nodo
     ctx.fillStyle = "white";
-    ctx.font = "bold 16px Arial";
+    ctx.font = "bold 18px Arial"; 
     ctx.fillText(props.letras[i], posiciones[i].x, posiciones[i].y);
   }
 }
@@ -103,9 +104,11 @@ watch(() => [props.matriz, props.ciclo], dibujarGrafo, { deep: true });
   justify-content: center;
   margin-top: 1rem;
 }
+
 canvas {
   border: 1px solid #ddd;
   border-radius: 0.5rem;
   background: #fdfdfd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 </style>
